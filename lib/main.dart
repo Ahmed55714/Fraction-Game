@@ -14,7 +14,7 @@ void main() async {
   // Get the saved language from local storage
   String? savedLanguageCode =
       await LocalStorageHelper().getItem<String>(key: 'language_code');
-  Locale startLocale = savedLanguageCode == 'ar' 
+  Locale startLocale = savedLanguageCode == 'ar'
       ? const Locale('ar', 'EG')
       : const Locale('en', 'US');
 
@@ -32,7 +32,7 @@ void main() async {
       ],
       path: 'assets/lang',
       saveLocale: true,
-      startLocale: startLocale, // Set the start locale dynamically
+      startLocale: startLocale,
       child: blocProvidersList.isNotEmpty
           ? MultiBlocProvider(
               providers: blocProvidersList,

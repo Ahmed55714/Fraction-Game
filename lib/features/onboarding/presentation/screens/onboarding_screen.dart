@@ -36,16 +36,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     );
 
     _logoAnimation = Tween<Offset>(
-      begin: Offset(-1.0, 0.0), // Start off-screen to the left
-      end: Offset(0.0, 0.0), // End at the original position
+      begin: Offset(-1.0, 0.0),
+      end: Offset(0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
 
     _dividerAnimation = Tween<Offset>(
-      begin: Offset(1.0, 0.0), // Start off-screen to the right
-      end: Offset(0.0, 0.0), // End at the original position
+      begin: Offset(1.0, 0.0),
+      end: Offset(0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -74,10 +74,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isArabic = context.locale.languageCode == 'ar';
-
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.blackBackground,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Stack(
@@ -108,6 +106,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                       height: 120,
                                     ),
                                     SizedBox(height: 12),
+                                    Text(
+                                      LangKeys.fraction,
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

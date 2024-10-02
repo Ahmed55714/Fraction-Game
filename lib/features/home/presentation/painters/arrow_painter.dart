@@ -5,7 +5,7 @@ enum ArrowDirection { up, down, left, right }
 class ArrowPainter extends CustomPainter {
   final Color color;
   final ArrowDirection direction;
-  final int number; // New field to display the number
+  final int number;
 
   ArrowPainter({
     required this.color,

@@ -8,22 +8,36 @@ class GridPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-      ..color = Colors.grey[700]!
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
+    var paint = _createPaint();
     double cellWidth = size.width / columns;
     double cellHeight = size.height / rows;
 
-    for (int i = 0; i <= columns; i++) {
-      // Draw vertical lines
-      canvas.drawLine(Offset(i * cellWidth, 0), Offset(i * cellWidth, size.height), paint);
-    }
+    _drawVerticalLines(canvas, size, cellWidth, paint);
+    _drawHorizontalLines(canvas, size, cellHeight, paint);
+  }
 
+  Paint _createPaint() {
+    return Paint()
+      ..color = Colors.grey[700]!
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+  }
+
+  // Draw vertical grid lines
+  void _drawVerticalLines(
+      Canvas canvas, Size size, double cellWidth, Paint paint) {
+    for (int i = 0; i <= columns; i++) {
+      double x = i * cellWidth;
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+    }
+  }
+
+  // Draw horizontal grid lines
+  void _drawHorizontalLines(
+      Canvas canvas, Size size, double cellHeight, Paint paint) {
     for (int i = 0; i <= rows; i++) {
-      // Draw horizontal lines
-      canvas.drawLine(Offset(0, i * cellHeight), Offset(size.width, i * cellHeight), paint);
+      double y = i * cellHeight;
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }
   }
 

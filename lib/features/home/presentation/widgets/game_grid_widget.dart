@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../painters/grid_painter.dart';
 import '../painters/arrow_painter.dart';
+import '../../../../core/constants/image_paths.dart';
 
 class GameGridWidget extends StatefulWidget {
   final int purpleColumns;
@@ -11,6 +13,9 @@ class GameGridWidget extends StatefulWidget {
   final Function(int) toggleSquareSelection;
   final Function(int) updatePurpleColumns;
   final Function(int) updateCyanRows;
+  final Function onReset;
+  final bool highlightGreen; // Controls green highlighting
+  final bool showCelebration; // Controls celebration animation
 
   const GameGridWidget({
     required this.purpleColumns,
@@ -19,6 +24,9 @@ class GameGridWidget extends StatefulWidget {
     required this.toggleSquareSelection,
     required this.updatePurpleColumns,
     required this.updateCyanRows,
+    required this.onReset,
+    required this.highlightGreen,
+    required this.showCelebration,
   });
 
   @override
@@ -28,8 +36,8 @@ class GameGridWidget extends StatefulWidget {
 class _GameGridWidgetState extends State<GameGridWidget> {
   double verticalArrowPosition = 85.h;
   double horizontalArrowPosition = 85.w;
-  int tempCyanRows = 6;
-  int tempPurpleColumns = 5;
+  late int tempCyanRows;
+  late int tempPurpleColumns;
 
   @override
   void initState() {
@@ -38,6 +46,7 @@ class _GameGridWidgetState extends State<GameGridWidget> {
     tempPurpleColumns = widget.purpleColumns;
   }
 
+  // Updates row count based on vertical arrow movement
   void _updateRowCount(double newPosition) {
     setState(() {
       verticalArrowPosition = newPosition.clamp(0.0, 170.h);
@@ -45,6 +54,7 @@ class _GameGridWidgetState extends State<GameGridWidget> {
     });
   }
 
+  // Updates column count based on horizontal arrow movement
   void _updateColumnCount(double newPosition) {
     setState(() {
       horizontalArrowPosition = newPosition.clamp(0.0, 170.w);
@@ -52,122 +62,123 @@ class _GameGridWidgetState extends State<GameGridWidget> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  // Builds the game grid with interactive squares
+  Widget _buildGrid() {
     return Container(
-      height: 250.h,
-      width: 250.w,
+      height: 200.h,
+      width: 200.w,
       child: Stack(
         children: [
-          // Grid painter: Draws the grid based on the number of rows and columns
           CustomPaint(
-            size: Size(250.w, 250.h),
+            size: Size(200.w, 200.h),
             painter:
                 GridPainter(columns: tempPurpleColumns, rows: tempCyanRows),
           ),
-          // Interactive Squares
           for (int row = 0; row < tempCyanRows; row++)
             for (int col = 0; col < tempPurpleColumns; col++)
               Positioned(
-                top: row * (250.h / tempCyanRows),
-                left: col * (250.w / tempPurpleColumns),
+                top: row * (200.h / tempCyanRows),
+                left: col * (200.w / tempPurpleColumns),
                 child: GestureDetector(
                   onTap: () => widget
                       .toggleSquareSelection(row * tempPurpleColumns + col),
                   child: Container(
-                    width: (250.w / tempPurpleColumns) - 2,
-                    height: (250.h / tempCyanRows) - 2,
+                    width: (200.w / tempPurpleColumns) - 2,
+                    height: (200.h / tempCyanRows) - 2,
                     color: widget.selectedSquares
                             .contains(row * tempPurpleColumns + col)
-                        ? AppColors.cyen
+                        ? (widget.highlightGreen
+                            ? Colors.green
+                            : AppColors.cyen)
                         : AppColors.grey700,
                   ),
                 ),
               ),
-          // Vertical Cyan Arrows (Control Rows)
-          Positioned(
-            top: verticalArrowPosition,
-            left: 0.w,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                _updateRowCount(verticalArrowPosition + details.delta.dy);
-              },
-              onPanEnd: (_) {
-                widget.updateCyanRows(
-                    tempCyanRows); // changes after dragging ends
-              },
-              child: CustomPaint(
-                size: Size(25.w, 25.h),
-                painter: ArrowPainter(
-                    color: AppColors.cyen,
-                    direction: ArrowDirection.right,
-                    number: tempCyanRows),
-              ),
-            ),
-          ),
-          Positioned(
-            top: verticalArrowPosition,
-            right: 0.w,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                _updateRowCount(verticalArrowPosition + details.delta.dy);
-              },
-              onPanEnd: (_) {
-                widget.updateCyanRows(
-                    tempCyanRows); // changes after dragging ends
-              },
-              child: CustomPaint(
-                size: Size(25.w, 25.h),
-                painter: ArrowPainter(
-                    color: AppColors.cyen,
-                    direction: ArrowDirection.left,
-                    number: tempCyanRows),
-              ),
-            ),
-          ),
-          // Horizontal Purple Arrows (Control Columns)
-          Positioned(
-            top: 0.h,
-            left: horizontalArrowPosition,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                _updateColumnCount(horizontalArrowPosition + details.delta.dx);
-              },
-              onPanEnd: (_) {
-                widget.updatePurpleColumns(
-                    tempPurpleColumns); // changes after dragging ends
-              },
-              child: CustomPaint(
-                size: Size(25.w, 25.h),
-                painter: ArrowPainter(
-                    color: AppColors.purple,
-                    direction: ArrowDirection.down,
-                    number: tempPurpleColumns),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0.h,
-            left: horizontalArrowPosition,
-            child: GestureDetector(
-              onPanUpdate: (details) {
-                _updateColumnCount(horizontalArrowPosition + details.delta.dx);
-              },
-              onPanEnd: (_) {
-                widget.updatePurpleColumns(
-                    tempPurpleColumns); // changes after dragging ends
-              },
-              child: CustomPaint(
-                size: Size(25.w, 25.h),
-                painter: ArrowPainter(
-                    color: AppColors.purple,
-                    direction: ArrowDirection.up,
-                    number: tempPurpleColumns),
-              ),
-            ),
-          ),
         ],
       ),
+    );
+  }
+
+  // Builds arrow controls for the grid
+  Widget _buildArrowControls() {
+    return Stack(
+      children: [
+        _buildVerticalArrow(isLeft: true),
+        _buildVerticalArrow(isLeft: false),
+        _buildHorizontalArrow(isTop: true),
+        _buildHorizontalArrow(isTop: false),
+      ],
+    );
+  }
+
+  // Builds a vertical arrow (either left or right)
+  Widget _buildVerticalArrow({required bool isLeft}) {
+    return Positioned(
+      top: verticalArrowPosition,
+      left: isLeft ? 0.w : null,
+      right: !isLeft ? 0.w : null,
+      child: GestureDetector(
+        onPanUpdate: (details) {
+          _updateRowCount(verticalArrowPosition + details.delta.dy);
+        },
+        onPanEnd: (_) {
+          widget.updateCyanRows(tempCyanRows);
+        },
+        child: CustomPaint(
+          size: Size(25.w, 25.h),
+          painter: ArrowPainter(
+            color: AppColors.cyen,
+            direction: isLeft ? ArrowDirection.left : ArrowDirection.right,
+            number: tempCyanRows,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Builds a horizontal arrow (either top or bottom)
+  Widget _buildHorizontalArrow({required bool isTop}) {
+    return Positioned(
+      top: isTop ? 0.h : null,
+      bottom: !isTop ? 0.h : null,
+      left: horizontalArrowPosition,
+      child: GestureDetector(
+        onPanUpdate: (details) {
+          _updateColumnCount(horizontalArrowPosition + details.delta.dx);
+        },
+        onPanEnd: (_) {
+          widget.updatePurpleColumns(tempPurpleColumns);
+        },
+        child: CustomPaint(
+          size: Size(25.w, 25.h),
+          painter: ArrowPainter(
+            color: AppColors.purple,
+            direction: isTop ? ArrowDirection.down : ArrowDirection.up,
+            number: tempPurpleColumns,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        _buildGrid(),
+        _buildArrowControls(),
+        if (widget.showCelebration)
+          Positioned.fill(
+            child: Center(
+              child: Lottie.asset(
+                ImagePaths.celebration,
+                width: 500.w,
+                height: 500.h,
+                repeat: false,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
