@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/home/presentation/screens/game_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../constants/routes.dart';
 
@@ -10,9 +10,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => const OnBoardingScreen(),
       );
-case AppRoutes.homeScreen:
+case AppRoutes.gameScreen:
       return MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
+        builder: (context) => GameScreen(),
       );
     
     default:

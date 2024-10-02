@@ -7,7 +7,7 @@ class ImagePaths {
   static const String rightIcon = "${iconsBase}right.svg";
 
   ///logo
-  static const String svglogo = "${imagesBase}logo.png";
+  static const String logo = "${imagesBase}fraction.png";
 
   
 }

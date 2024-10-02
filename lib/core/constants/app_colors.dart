@@ -9,6 +9,10 @@ class AppColors {
   static const Color greySoft = Color(0xFFF1F1F1);
   static const Color greyBackground = Color(0xFFDFDFDF);
   static const Color greyBarelyMedium = Color(0xFFA1A5C1);
+  static const Color purple = Color(0xFF9C27B0);
+  static const Color cyen = Color(0xFF00BCD4);
+  static const Color grey800 = Color(0xFF424242);
+  static const Color grey700 = Color(0xFF616161);
 
   //red Colors
   static const Color redOne = Color(0xFFF44336);
@@ -22,7 +26,7 @@ class AppColors {
   static const Color darkBackground = Color(0xFF252525);
 
   // Primary Colors
-  static Color primary = Color(0xFF002E60);
+  static Color primary = Color.fromARGB(255, 75, 99, 125);
   static const Color lighterPrimary = Color(0XFFFFCC90);
   static const Color darkerPrimary = Color(0XFFBD6C0C);
 

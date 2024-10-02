@@ -3,9 +3,6 @@ import 'package:photo_manager/photo_manager.dart';
 import 'permissions_helper.dart';
 
 class MediaHelper {
-  /// Fetches the latest images from the device's gallery.
-  /// [requestType] determines the type of media to request (e.g., images, videos).
-  /// [limit] specifies the maximum number of images to fetch, default is 20.
   static Future<List<AssetEntity>> getLatestImages(RequestType requestType,
       {int limit = 20}) async {
     List<AssetEntity> assetList = [];

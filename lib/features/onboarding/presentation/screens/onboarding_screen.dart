@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/image_paths.dart';
@@ -102,18 +103,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Image.asset(
-                                      ImagePaths.svglogo,
+                                      ImagePaths.logo,
                                       width: 120,
                                       height: 120,
-                                      color: AppColors.white,
                                     ),
                                     SizedBox(height: 12),
-                                    // SvgPicture.asset(
-                                    //   ImagePaths.ramaLogo,
-                                    //   width: 20,
-                                    //   height: 20,
-                                    //   color: AppColors.white,
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -142,7 +136,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                     model: ButtonModel(
                       onPress: () {
                         Navigation()
-                            .navigateTo(routeName: AppRoutes.homeScreen);
+                            .navigateTo(routeName: AppRoutes.gameScreen);
                       },
                       color: AppColors.white,
                       textColor: AppColors.primary,
