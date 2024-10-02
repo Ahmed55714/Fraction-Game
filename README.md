@@ -1,16 +1,23 @@
-# fraction
+# Fraction Game
 
-A new Flutter project.
+Fraction is an interactive learning game built with Flutter. The game teaches players about fractions by requiring them to select the correct portion of a grid. The goal is to allow players to practice selecting fractions visually and to receive feedback through interactive animations.
+
+## Features
+
+- **Interactive Gameplay:** Players tap on the grid to select squares that correspond to the fraction displayed.
+- **Dynamic Grid:** The grid size changes with each question, with rows and columns generated randomly.
+- **Progress Tracking:** A progress bar keeps track of the player's progress through the game.
+- **Visual Feedback:** Correct selections are highlighted in green, and animations celebrate correct answers.
+- **Celebration Animations:** Enjoy beautifully designed Lottie animations after correct answers and at the end of each round.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Follow the instructions below to set up and run the Fraction game on your local machine.
 
-A few resources to get you started if this is your first Flutter project:
+### Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the repository:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   git clone https://github.com/Ahmed55714/fraction-task.git
+   cd fraction-task
