@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fl_country_code_picker/fl_country_code_picker.dart' as flc;
 import 'core/constants/app_theme.dart';
 import 'core/constants/bloc.dart';
 import 'core/helper/router.dart' as router;
@@ -34,11 +33,9 @@ class _MyAppState extends State<MyApp>
           title: "lawyer",
           localizationsDelegates: [
             ...context.localizationDelegates,
-            flc.CountryLocalizations.delegate,
           ],
           supportedLocales: [
             ...context.supportedLocales,
-            ...flc.CountryLocalizations.supportedLocales.map(Locale.new),
           ],
           locale: context.locale,
           theme: buildAppTheme(context),

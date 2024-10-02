@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:image_picker/image_picker.dart'; // Import image_picker package
 
 class ListsHelper {
   /// Sets up a scroll listener on the provided [scrollController].
@@ -25,10 +24,5 @@ class ListsHelper {
         ScrollDirection.forward;
   }
 
-  /// Picks an image from the gallery using image_picker package
-  Future<XFile?> pickImageFromGallery() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    return image;
-  }
+  
 }
