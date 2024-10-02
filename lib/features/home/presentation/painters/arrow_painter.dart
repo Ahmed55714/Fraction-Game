@@ -5,8 +5,13 @@ enum ArrowDirection { up, down, left, right }
 class ArrowPainter extends CustomPainter {
   final Color color;
   final ArrowDirection direction;
+  final int number; // New field to display the number
 
-  ArrowPainter({required this.color, required this.direction});
+  ArrowPainter({
+    required this.color,
+    required this.direction,
+    required this.number,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -41,10 +46,26 @@ class ArrowPainter extends CustomPainter {
 
     path.close();
     canvas.drawPath(path, paint);
+
+    // Draw the number inside the arrow
+    var textPainter = TextPainter(
+      text: TextSpan(
+        text: number.toString(),
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+
+    textPainter.layout(minWidth: 0, maxWidth: size.width);
+    textPainter.paint(canvas, Offset(size.width / 2 - textPainter.width / 2, size.height / 2 - textPainter.height / 2));
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    return true;
   }
 }

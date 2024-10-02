@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:fraction/core/constants/app_colors.dart';
 
 class GridPainter extends CustomPainter {
+  final int columns;
+  final int rows;
+
+  GridPainter({required this.columns, required this.rows});
+
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = AppColors.grey700
+      ..color = Colors.grey[700]!
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    double cellSize = size.width / 3;
+    double cellWidth = size.width / columns;
+    double cellHeight = size.height / rows;
 
-    // width and height to ensure the lines are drawn within the bounds
-    double adjustedWidth = size.width - paint.strokeWidth / 2;
-    double adjustedHeight = size.height - paint.strokeWidth / 2;
-
-    // Draw grid lines
-    for (int i = 0; i <= 3; i++) {
-      // Draw horizontal lines
-      canvas.drawLine(
-          Offset(0, i * cellSize), Offset(adjustedWidth, i * cellSize), paint);
-
+    for (int i = 0; i <= columns; i++) {
       // Draw vertical lines
-      canvas.drawLine(
-          Offset(i * cellSize, 0), Offset(i * cellSize, adjustedHeight), paint);
+      canvas.drawLine(Offset(i * cellWidth, 0), Offset(i * cellWidth, size.height), paint);
+    }
+
+    for (int i = 0; i <= rows; i++) {
+      // Draw horizontal lines
+      canvas.drawLine(Offset(0, i * cellHeight), Offset(size.width, i * cellHeight), paint);
     }
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+    return true;
   }
 }

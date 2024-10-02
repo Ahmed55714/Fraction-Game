@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fraction/core/constants/app_colors.dart';
+import '../../../../core/constants/app_colors.dart';
 
 class FractionDisplayWidget extends StatelessWidget {
+  final int selectedCount;
+  final int totalSquares;
+
+  const FractionDisplayWidget({
+    required this.selectedCount,
+    required this.totalSquares,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -11,7 +19,7 @@ class FractionDisplayWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '1',
+              '$selectedCount', // Selected squares
               style: TextStyle(color: AppColors.cyen, fontSize: 50.sp),
             ),
             Text(
@@ -19,35 +27,8 @@ class FractionDisplayWidget extends StatelessWidget {
               style: TextStyle(color: AppColors.cyen, fontSize: 50.sp),
             ),
             Text(
-              '3',
+              '$totalSquares', // Total squares (rows * columns)
               style: TextStyle(color: AppColors.cyen, fontSize: 50.sp),
-            ),
-          ],
-        ),
-        SizedBox(height: 10.h), // Use .h for vertical spacing
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '+',
-              style: TextStyle(color: AppColors.grey, fontSize: 50.sp),
-            ),
-            SizedBox(width: 10.w), // Use .w for horizontal spacing
-            Row(
-              children: [
-                Text(
-                  '1',
-                  style: TextStyle(color: AppColors.purple, fontSize: 50.sp),
-                ),
-                Text(
-                  '/',
-                  style: TextStyle(color: AppColors.purple, fontSize: 50.sp),
-                ),
-                Text(
-                  '2',
-                  style: TextStyle(color: AppColors.purple, fontSize: 50.sp),
-                ),
-              ],
             ),
           ],
         ),
