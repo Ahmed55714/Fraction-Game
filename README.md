@@ -21,3 +21,7 @@ Follow the instructions below to set up and run the Fraction game on your local 
    ```bash
    git clone https://github.com/Ahmed55714/fraction-task.git
    cd fraction-task
+
+### Video
+
+https://github.com/user-attachments/assets/004391b2-cb4d-478b-80f3-40c479b0feeb
